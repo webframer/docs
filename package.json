@@ -4,12 +4,20 @@
   "description": "Webframe Headless UI Components Documentation",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev"
   },
-  "keywords": ["ui", "components", "headless", "webframe", "docs"],
+  "keywords": [
+    "ui",
+    "components",
+    "headless",
+    "webframe",
+    "docs"
+  ],
   "author": "https://github.com/ecoinomist",
   "license": "MIT",
   "dependencies": {
+    "@webframer/js": "workspace:*",
+    "@webframer/ui": "workspace:*",
     "next": "12.2.3",
     "nextra": "^2.13.1",
     "nextra-theme-docs": "^2.13.1",
