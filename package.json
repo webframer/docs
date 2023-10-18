@@ -1,28 +1,44 @@
 {
-  "name": "@webframer/docs-ui",
-  "version": "1.0.0",
-  "description": "Webframe Headless UI Components Documentation",
-  "main": "index.js",
+  "name": "webframe-docs",
+  "version": "0.0.1",
+  "description": "Automatic Documentation Generator for React Components",
+  "homepage": "https://github.com/webframer/docs",
+  "author": "https://github.com/ecoinomist",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webframer/docs.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
   "scripts": {
-    "dev": "next dev"
+    "dev": "pnpm watch",
+    "build": "pnpm compile",
+    "parse": "node scripts/parsePropTypes.mjs",
+    "compile": "node scripts/compileDocs.mjs",
+    "watch": "pnpm compile --watch"
   },
   "keywords": [
-    "ui",
+    "docs",
+    "documentation",
+    "generator",
+    "propTypes",
+    "mdx",
+    "automatic",
+    "compiler",
+    "react",
     "components",
-    "headless",
-    "webframe",
-    "docs"
+    "webframe"
   ],
-  "author": "https://github.com/ecoinomist",
-  "license": "MIT",
   "dependencies": {
-    "@webframer/js": "workspace:*",
-    "@webframer/ui": "workspace:*",
-    "next": "12.2.3",
-    "nextra": "^2.13.1",
-    "nextra-theme-docs": "^2.13.1",
-    "react": "18.2.0",
-    "react-docgen": "^6.0.4",
-    "react-dom": "18.2.0"
+    "@webframer/js": "workspace:*"
+  },
+  "devDependencies": {
+    "chalk": "^5.1.2",
+    "chokidar": "^3.5.3",
+    "commander": "^11.1.0",
+    "compiler": "workspace:*",
+    "fast-glob": "^3.2.12",
+    "tailwindcss": "3.3.3"
   }
 }
