@@ -14,8 +14,8 @@
   "scripts": {
     "dev": "pnpm watch",
     "build": "pnpm compile",
-    "parse": "node scripts/parsePropTypes.mjs",
-    "compile": "node scripts/compileDocs.mjs",
+    "parse": "node src/parsePropTypes.js",
+    "compile": "node src/compileDocs.js",
     "watch": "pnpm compile --watch"
   },
   "keywords": [
@@ -31,14 +31,19 @@
     "webframe"
   ],
   "dependencies": {
-    "@webframer/js": "workspace:*"
-  },
-  "devDependencies": {
+    "@webframer/js": "workspace:*",
     "chalk": "^5.1.2",
     "chokidar": "^3.5.3",
     "commander": "^11.1.0",
     "compiler": "workspace:*",
-    "fast-glob": "^3.2.12",
+    "core": "workspace:*",
+    "fast-glob": "^3.2.12"
+  },
+  "devDependencies": {
     "tailwindcss": "3.3.3"
-  }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bin": "./bin.js"
 }
