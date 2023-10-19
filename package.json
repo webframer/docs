@@ -1,6 +1,6 @@
 {
   "name": "webframe-docs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Automatic Documentation Generator for React Components",
   "homepage": "https://github.com/webframer/docs",
   "author": "https://github.com/ecoinomist",
@@ -11,13 +11,6 @@
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
-  "scripts": {
-    "dev": "pnpm watch",
-    "build": "pnpm compile",
-    "parse": "node src/parsePropTypes.js",
-    "compile": "node src/compileDocs.js",
-    "watch": "pnpm compile --watch"
-  },
   "keywords": [
     "docs",
     "documentation",

@@ -5,8 +5,8 @@ import chokidar from 'chokidar'
 import { makeDirectory, saveFile } from 'compiler/utils/file.js'
 import { readFile, removeFile } from 'core/utils/file.js'
 import path from 'path'
+import { compilePropTypes } from './compilePropTypes.js'
 import { getConfig, workDir } from './config.js'
-import { compilePropTypes } from './parsePropTypes.js'
 
 /**
  * =================================================================================================

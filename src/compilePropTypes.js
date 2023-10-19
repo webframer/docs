@@ -1,7 +1,7 @@
-import { toJSON } from '@webframer/js'
+import { hasListValue, toJSON } from '@webframer/js'
 import { formatDuration } from '@webframer/js/time.js'
 import chalk from 'chalk'
-import { parseProptypes } from 'compiler/utils/babel.js'
+import { parsePropTypes } from 'compiler/utils/babel.js'
 import { saveFile } from 'compiler/utils/file.js'
 import glob from 'fast-glob'
 import fs from 'fs'
@@ -17,21 +17,39 @@ export async function compilePropTypes ({componentFilePatterns, propTypesFilePat
   const start = Date.now()
   const componentFilePaths = await glob(componentFilePatterns)
   const proptypes = {}
+  const parseOptions = {
+    defaultPropsComments: true,
+    defaultPropsValue: true,
+    propTypesComments: true,
+    propTypesValue: false,
+    formatComments,
+  }
 
   // Parse React Components
   console.log(chalk.magenta('event'), '- parsing source code from', componentFilePatterns)
   let fileSrc
   for (const filePath of componentFilePaths) {
     fileSrc = fs.readFileSync(filePath, 'utf-8')
-    Object.assign(proptypes, parseProptypes(fileSrc))
+    Object.assign(proptypes, parsePropTypes(fileSrc, parseOptions))
   }
 
+  // Concatenate comments upfront to reduce file size and speed up rendering
+
   // Write to output propTypes.json file
-  saveFile(propTypesFilePath, toJSON(proptypes, null, 2))
+  saveFile(propTypesFilePath, toJSON(proptypes))
 
   // Output message
   console.log(
     chalk.green('Done'),
     `- parsed to ${propTypesFilePath} in ${formatDuration(Date.now() - start, {round: false, largest: 2})}`,
   )
+}
+
+// Concatenates `comments` array from `parsePropTypes` function into a single string
+export function formatComments (comments) {
+  if (!hasListValue(comments)) return
+
+  return comments
+    .map(({v}) => v.split('\n').map(s => s.trim()).join('\n').trim())
+    .join('\n\n') // double newline required to work with markdown for separate comments
 }
