@@ -1,4 +1,4 @@
-import { hasListValue, toJSON } from '@webframer/js'
+import { hasListValue, toJSON, update } from '@webframer/js'
 import { formatDuration } from '@webframer/js/time.js'
 import chalk from 'chalk'
 import { parsePropTypes } from 'compiler/utils/babel.js'
@@ -30,7 +30,7 @@ export async function compilePropTypes ({componentFilePatterns, propTypesFilePat
   let fileSrc
   for (const filePath of componentFilePaths) {
     fileSrc = fs.readFileSync(filePath, 'utf-8')
-    Object.assign(proptypes, parsePropTypes(fileSrc, parseOptions))
+    update(proptypes, parsePropTypes(fileSrc, parseOptions))
   }
 
   // Concatenate comments upfront to reduce file size and speed up rendering
