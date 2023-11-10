@@ -11,15 +11,16 @@ export const configDefault = {
         '!**/node_modules',
         './components/**/*.{js,jsx}',
       ],
+      'outputComponents': './dist', // must be directory path, not glob pattern
       'inputDocs': './docs', // must be a single glob string to replace input with output dir
       'outputDocs': './pages/docs', // must be directory path, not glob pattern
-      'outputPropTypes': './src/propTypes.json',
+      'outputPropTypes': './src/propTypes.json.js',
     },
   ],
 }
 
 // Directory path where the command is called (should have 'webframe.docs.json' file)
-export const workDir = process.cwd()
+export const workDir = process.cwd() + '/'
 export const configFilePath = path.resolve(workDir, configFileName)
 
 // Webframe Docs Config ----------------------------------------------------------------------------
