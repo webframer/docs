@@ -3,6 +3,7 @@ import { formatDuration } from '@webframer/js/time.js'
 import chalk from 'chalk'
 import { parsePropTypes } from 'compiler/utils/babel.js'
 import { saveFile } from 'compiler/utils/file.js'
+import { formatCode, prettierOpts } from 'compiler/utils/format.js'
 import glob from 'fast-glob'
 import fs from 'fs'
 import { workDir } from './config.js'
@@ -25,6 +26,7 @@ export async function compilePropTypes ({componentFilePatterns, propTypesFilePat
     propTypesComments: true,
     propTypesValue: false,
     formatComments,
+    formatValue,
   }
 
   // Parse React Components
@@ -57,4 +59,15 @@ export function formatComments (comments) {
   return comments
     .map(({v}) => v.split('\n').map(s => s.trim()).join('\n').trim())
     .join('\n\n') // double newline required to work with markdown for separate comments
+}
+
+// Prettier babel parser complains that value is not a valid code => prefix const to make it valid
+export function formatValue (value) {
+  const prefix = `let _$ = `
+  return formatCode(prefix + value, formatValueOpt).substring(prefix.length).trim()
+}
+
+const formatValueOpt = {
+  ...prettierOpts,
+  printWidth: 40,
 }
